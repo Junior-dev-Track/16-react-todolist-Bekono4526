@@ -4,7 +4,7 @@ function Todo() {
     <>
       <div>
         <form>
-          <input type="text" value ="Type a new todo" />
+          <input type="text" name="Type a new todo" />
         </form>
         <button>Add a new todo</button>
         <hr />
