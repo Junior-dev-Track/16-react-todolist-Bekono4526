@@ -1,21 +1,26 @@
-import { useState } from "react";
-import "./App.css";
+// Footer.jsx
+import React from "react";
 
-function Footer() {
+function Footer({ tasks, handleDeleteTask }) {
   return (
     <>
       <h2>Todos</h2>
-
-
       <div className="footer">
-<ul>
-  <li> <input type="checkbox" />Learn React</li>
-  <li><input type="checkbox" /> Be Awesome!</li>
-</ul>
+        <ul>
+          {tasks.map((task, index) => (
+            <li key={index}>
+              <input type="checkbox" />
+              <span>{task}</span>
+              <button className="btn" onClick={() => handleDeleteTask(index)}>Delete</button>
+            </li>
+          ))}
+        </ul>
       </div>
-      <button className="btn">Delete</button>
     </>
   );
 }
 
 export default Footer;
+
+
+

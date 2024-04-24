@@ -26,10 +26,22 @@ h2 {
 .footer {
   display: flex;
   flex-direction: column;
-  width: 50%;
+  width: 80%;
+
+  background-color:black;
+  
 }
 li {
-  list-style-type: none;
+  
+  list-style-type: none;/**supprimer les points du li**/
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 6px 6px 12px wheat, -6px -6px 12px white;
+  padding: 0 10px; /* Ajoute du padding */
+}
+input[type="checkbox"] {
+  margin-right: -500px; /* Ajoute une marge à droite pour la checkbox */
 }
 
 .todo {
