@@ -1,28 +1,27 @@
-// App.jsx
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import Todo from "./Todo.jsx";
 import Footer from "./Footer.jsx";
 
+const LSKEY = "tasks";
+
 function App() {
-  const [tasks, setTasks] = useState([]);
+  // Initialisation des tâches à partir du localStorage ou un tableau vide
+  const [tasks, setTasks] = useState(() => {
+    const savedTasks = JSON.parse(localStorage.getItem(LSKEY));
+    return savedTasks || [];
+  });
+
   const [taskInput, setTaskInput] = useState('');
 
+  // Sauvegarde les tâches dans le localStorage à chaque changement
   useEffect(() => {
-    // Récupère les tâches sauvegardées dans le localStorage lors du chargement de la page
-    const savedTasks = JSON.parse(localStorage.getItem('tasks'));
-    if (savedTasks) {
-      setTasks(savedTasks);
-    }
-  }, []);
-
-  useEffect(() => {
-    // Sauvegarde les tâches dans le localStorage à chaque changement
-    localStorage.setItem('tasks', JSON.stringify(tasks));
+    localStorage.setItem(LSKEY, JSON.stringify(tasks));
   }, [tasks]);
 
   const handleAddTask = () => {
     if (taskInput.trim() !== '') {
+      // Ajoutez la nouvelle tâche sans écraser les tâches existantes
       setTasks([...tasks, taskInput]);
       setTaskInput('');
     }
@@ -35,22 +34,21 @@ function App() {
   };
 
   return (
-    <>
-      <div className="container">
-        <nav>
-          <h1>My Todo App</h1>
-        </nav>
-        <Todo
-          taskInput={taskInput}
-          setTaskInput={setTaskInput}
-          handleAddTask={handleAddTask}
-        />
-        <Footer tasks={tasks} handleDeleteTask={handleDeleteTask} />
-      </div>
-    </>
+    <div className="container">
+      <nav>
+        <h1>My Todo App</h1>
+      </nav>
+      <Todo
+        taskInput={taskInput}
+        setTaskInput={setTaskInput}
+        handleAddTask={handleAddTask}
+      />
+      <Footer tasks={tasks} handleDeleteTask={handleDeleteTask} />
+    </div>
   );
 }
 
 export default App;
+
 
 
